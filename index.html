@@ -1,1607 +1,887 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Anas Boughli — Elite Bodybuilding Coach</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Barlow:wght@300;400;500&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --gold: #C9A84C;
-      --gold-light: #E8C97A;
-      --gold-dark: #8B6914;
-      --black: #060606;
-      --dark: #0E0E0E;
-      --dark2: #161616;
-      --dark3: #1E1E1E;
-      --white: #F5F0E8;
-      --gray: #888;
-      --gap: clamp(60px, 10vw, 120px);
-    }
-
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Barlow', sans-serif;
-      background: var(--black);
-      color: var(--white);
-      overflow-x: hidden;
-      cursor: default;
-    }
-
-    /* ─── NOISE OVERLAY ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.4;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(to bottom, rgba(6,6,6,0.95), transparent);
-    }
-
-    .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--white);
-      text-decoration: none;
-      opacity: 0.7;
-      transition: opacity 0.2s, color 0.2s;
-    }
-
-    .nav-links a:hover { opacity: 1; color: var(--gold); }
-
-    .nav-cta {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--black) !important;
-      background: var(--gold) !important;
-      padding: 8px 22px;
-      border-radius: 2px;
-      opacity: 1 !important;
-      transition: background 0.2s, transform 0.2s !important;
-    }
-
-    .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
-
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
-    }
-
-    .hero-lines {
-      position: absolute;
-      top: 0; right: 0;
-      width: 50%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .hero-lines::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 120%;
-      height: 140%;
-      background: linear-gradient(135deg, transparent 40%, rgba(201,168,76,0.04) 40.1%, transparent 40.2%),
-                  linear-gradient(135deg, transparent 50%, rgba(201,168,76,0.03) 50.1%, transparent 50.2%),
-                  linear-gradient(135deg, transparent 60%, rgba(201,168,76,0.02) 60.1%, transparent 60.2%);
-    }
-
-    .hero-left {
-      padding: clamp(100px, 12vw, 160px) clamp(20px, 5vw, 80px) clamp(60px, 8vw, 100px) clamp(20px, 8vw, 120px);
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 28px;
-      padding: 6px 14px 6px 6px;
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 2px;
-    }
-
-    .hero-badge span.dot {
-      width: 6px; height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-      animation: blink 2s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .hero-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 8vw, 8rem);
-      line-height: 0.92;
-      letter-spacing: 0.02em;
-      margin-bottom: 32px;
-    }
-
-    .hero-title .line { display: block; overflow: hidden; }
-    .hero-title .line-inner {
-      display: block;
-      animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-    .hero-title .line:nth-child(1) .line-inner { animation-delay: 0.1s; }
-    .hero-title .line:nth-child(2) .line-inner { animation-delay: 0.2s; }
-    .hero-title .line:nth-child(3) .line-inner { animation-delay: 0.3s; }
-    .hero-title .line:nth-child(4) .line-inner { animation-delay: 0.4s; color: var(--gold); }
-
-    @keyframes slideUp {
-      from { transform: translateY(110%); opacity: 0; }
-      to   { transform: translateY(0);    opacity: 1; }
-    }
-
-    /* ─── WORD-BY-WORD GLOW ANIMATION ─── */
-    .hero-title .word {
-      display: inline-block;
-      position: relative;
-      transition: color 0.3s;
-    }
-
-    .hero-title .word.glow {
-      color: var(--gold);
-      text-shadow: 0 0 40px rgba(201,168,76,0.8), 0 0 80px rgba(201,168,76,0.4);
-    }
-
-    /* Glitch effect on the last word */
-    .hero-title .glitch-word {
-      position: relative;
-      display: inline-block;
-    }
-
-    .hero-title .glitch-word::before,
-    .hero-title .glitch-word::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      color: var(--gold);
-    }
-
-    .hero-title .glitch-word::before {
-      animation: glitch1 3s infinite linear;
-      clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-      transform: translateX(-2px);
-      color: #ff6b35;
-      opacity: 0;
-    }
-
-    .hero-title .glitch-word::after {
-      animation: glitch2 3s infinite linear;
-      clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-      transform: translateX(2px);
-      color: var(--gold-light);
-      opacity: 0;
-    }
-
-    @keyframes glitch1 {
-      0%, 90%, 100% { opacity: 0; transform: translateX(0); }
-      92% { opacity: 1; transform: translateX(-4px) skewX(-2deg); }
-      94% { opacity: 0; transform: translateX(3px); }
-      96% { opacity: 1; transform: translateX(-2px); }
-      98% { opacity: 0; }
-    }
-
-    @keyframes glitch2 {
-      0%, 90%, 100% { opacity: 0; transform: translateX(0); }
-      93% { opacity: 1; transform: translateX(4px) skewX(2deg); }
-      95% { opacity: 0; transform: translateX(-3px); }
-      97% { opacity: 1; transform: translateX(2px); }
-      99% { opacity: 0; }
-    }
-
-    /* Animated gold underline on hero title words */
-    .hero-title .underline-word {
-      position: relative;
-    }
-
-    .hero-title .underline-word::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0%; height: 3px;
-      background: var(--gold);
-      animation: underlineGrow 0.6s cubic-bezier(0.16,1,0.3,1) 1.6s both;
-    }
-
-    @keyframes underlineGrow {
-      from { width: 0%; }
-      to   { width: 100%; }
-    }
-
-    /* Scroll indicator */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      z-index: 3;
-      animation: fadeIn 1s 1.8s both;
-      cursor: pointer;
-    }
-
-    .scroll-indicator span {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(245,240,232,0.4);
-    }
-
-    .scroll-mouse {
-      width: 22px; height: 36px;
-      border: 1px solid rgba(201,168,76,0.4);
-      border-radius: 11px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      padding-top: 6px;
-    }
-
-    .scroll-mouse::before {
-      content: '';
-      width: 3px; height: 7px;
-      background: var(--gold);
-      border-radius: 2px;
-      animation: scrollDot 1.8s ease infinite;
-    }
-
-    @keyframes scrollDot {
-      0% { transform: translateY(0); opacity: 1; }
-      80% { transform: translateY(12px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 0; }
-    }
-
-    .hero-sub {
-      font-size: 1.1rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: rgba(245,240,232,0.65);
-      max-width: 420px;
-      margin-bottom: 44px;
-      animation: fadeIn 1s 0.7s both;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      animation: fadeIn 1s 0.9s both;
-    }
-
-    .btn-primary {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      background: var(--gold);
-      color: var(--black);
-      border: none;
-      padding: 16px 36px;
-      border-radius: 2px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-    }
-
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
-      transform: translateX(-100%);
-      transition: transform 0.5s ease;
-    }
-
-    .btn-primary:hover::before { transform: translateX(100%); }
-
-    .btn-primary::after {
-      content: '→';
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: opacity 0.25s, transform 0.25s;
-    }
-
-    .btn-primary:hover::after { opacity: 1; transform: translateX(0); }
-
-    .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(201,168,76,0.45), 0 0 0 1px rgba(201,168,76,0.3);
-    }
-
-    .btn-primary:active { transform: translateY(-1px); }
-
-    .btn-outline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      background: transparent;
-      color: var(--white);
-      border: 1px solid rgba(245,240,232,0.3);
-      padding: 16px 36px;
-      border-radius: 2px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
-    }
-
-    .btn-outline::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(201,168,76,0.08);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-
-    .btn-outline:hover::before { transform: scaleX(1); }
-    .btn-outline:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-
-    .hero-stats {
-      margin-top: 60px;
-      display: flex;
-      gap: 40px;
-      animation: fadeIn 1s 1.1s both;
-    }
-
-    .stat { text-align: left; }
-
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.4rem;
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-top: 4px;
-    }
-
-    .hero-right {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero-image-wrap {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .hero-image-wrap::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, var(--black) 0%, transparent 30%),
-                  linear-gradient(to top, var(--black) 0%, transparent 40%);
-      z-index: 1;
-    }
-
-    .hero-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
-      filter: grayscale(20%) contrast(1.1);
-    }
-
-    .hero-accent-text {
-      position: absolute;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%) rotate(90deg);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 8rem;
-      color: rgba(201,168,76,0.05);
-      letter-spacing: 0.1em;
-      white-space: nowrap;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ─── SECTION HEADER ─── */
-    .section-tag {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .section-tag::before {
-      content: '';
-      width: 30px; height: 1px;
-      background: var(--gold);
-    }
-
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.8rem, 5vw, 5rem);
-      line-height: 0.95;
-      letter-spacing: 0.02em;
-    }
-
-    /* ─── ABOUT ─── */
-    .about {
-      padding: var(--gap) clamp(20px, 8vw, 120px);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .about-left .section-title { margin-bottom: 28px; }
-
-    .about-left p {
-      font-size: 1.05rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: rgba(245,240,232,0.65);
-      margin-bottom: 20px;
-    }
-
-    .about-left p strong { color: var(--white); font-weight: 500; }
-
-    .about-creds {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 32px;
-    }
-
-    .cred-pill {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: 1px solid rgba(201,168,76,0.4);
-      color: var(--gold);
-      padding: 6px 14px;
-      border-radius: 2px;
-    }
-
-    .about-right {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .about-img {
-      border-radius: 4px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .about-img img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      object-position: center 20%;
-      display: block;
-      transition: transform 0.5s ease;
-      filter: grayscale(15%) contrast(1.05);
-    }
-
-    .about-img:hover img { transform: scale(1.04); }
-
-    .about-img.tall { grid-row: span 2; }
-    .about-img.tall img { height: 100%; min-height: 500px; }
-
-    .about-img-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(6,6,6,0.6) 0%, transparent 50%);
-    }
-
-    /* ─── CERT STRIP ─── */
-    .cert-strip {
-      background: var(--dark2);
-      border-top: 1px solid rgba(201,168,76,0.15);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      padding: 40px clamp(20px, 8vw, 120px);
-      display: flex;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .cert-img {
-      width: 120px;
-      border-radius: 4px;
-      flex-shrink: 0;
-      border: 1px solid rgba(201,168,76,0.3);
-    }
-
-    .cert-text h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem;
-      letter-spacing: 0.05em;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .cert-text p {
-      font-size: 0.95rem;
-      font-weight: 300;
-      color: rgba(245,240,232,0.55);
-    }
-
-    /* ─── QUOTE BREAK ─── */
-    .quote-break {
-      padding: var(--gap) clamp(20px, 10vw, 160px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote-break::before {
-      content: '❝';
-      position: absolute;
-      top: -20px; left: 60px;
-      font-size: 12rem;
-      color: rgba(201,168,76,0.06);
-      font-family: serif;
-      line-height: 1;
-      pointer-events: none;
-    }
-
-    .quote-text {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.4;
-      color: var(--white);
-      position: relative;
-      z-index: 1;
-    }
-
-    .quote-text strong {
-      color: var(--gold);
-      font-style: normal;
-      font-weight: 700;
-    }
-
-    /* ─── PROGRAMS ─── */
-    .programs {
-      padding: var(--gap) clamp(20px, 8vw, 120px);
-      background: var(--dark);
-    }
-
-    .programs-header {
-      margin-bottom: 60px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .programs-subtitle {
-      font-size: 1rem;
-      font-weight: 300;
-      color: rgba(245,240,232,0.55);
-      max-width: 380px;
-      line-height: 1.7;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-
-    .plan-card {
-      background: var(--dark2);
-      padding: clamp(30px, 4vw, 50px);
-      position: relative;
-      transition: background 0.3s;
-      overflow: hidden;
-    }
-
-    .plan-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: transparent;
-      transition: background 0.3s;
-    }
-
-    .plan-card:hover::before { background: var(--gold); }
-    .plan-card:hover { background: var(--dark3); }
-    .plan-card.featured { background: var(--dark3); }
-    .plan-card.featured::before { background: var(--gold); }
-
-    .plan-tag {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .plan-tag .popular-badge {
-      background: var(--gold);
-      color: var(--black);
-      padding: 2px 8px;
-      border-radius: 2px;
-      font-size: 0.65rem;
-    }
-
-    .plan-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      letter-spacing: 0.03em;
-      line-height: 1;
-      margin-bottom: 24px;
-    }
-
-    .plan-desc {
-      font-size: 0.95rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: rgba(245,240,232,0.55);
-      margin-bottom: 32px;
-    }
-
-    .plan-features {
-      list-style: none;
-      margin-bottom: 40px;
-    }
-
-    .plan-features li {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      color: rgba(245,240,232,0.75);
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(245,240,232,0.07);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .plan-features li::before {
-      content: '';
-      width: 5px; height: 5px;
-      background: var(--gold);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .plan-price {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      margin-bottom: 28px;
-    }
-
-    .price-amount {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
-      line-height: 1;
-      color: var(--white);
-    }
-
-    .price-currency {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-    }
-
-    .price-period {
-      font-size: 0.8rem;
-      color: var(--gray);
-      font-weight: 300;
-    }
-
-    .plan-btn {
-      width: 100%;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 14px 20px;
-      border-radius: 2px;
-      border: 1px solid rgba(201,168,76,0.4);
-      background: transparent;
-      color: var(--gold);
-      cursor: pointer;
-      text-decoration: none;
-      display: block;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .plan-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 0; height: 0;
-      background: rgba(201,168,76,0.2);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.5s ease, height 0.5s ease;
-    }
-
-    .plan-btn:hover::before {
-      width: 300px; height: 300px;
-    }
-
-    .plan-btn::after {
-      content: ' →';
-      display: inline-block;
-      transform: translateX(0);
-      transition: transform 0.25s;
-    }
-
-    .plan-btn:hover::after { transform: translateX(6px); }
-
-    .plan-btn:hover, .plan-card.featured .plan-btn {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--black);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(201,168,76,0.35);
-    }
-
-    .plan-card.featured .plan-btn:hover {
-      background: var(--gold-light);
-      box-shadow: 0 12px 32px rgba(201,168,76,0.5);
-    }
-
-    .card-accent-num {
-      position: absolute;
-      bottom: -20px; right: 20px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 8rem;
-      color: rgba(255,255,255,0.03);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* ─── PROCESS ─── */
-    .process {
-      padding: var(--gap) clamp(20px, 8vw, 120px);
-    }
-
-    .process-header { margin-bottom: 60px; }
-
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      position: relative;
-    }
-
-    .process-steps::before {
-      content: '';
-      position: absolute;
-      top: 22px; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
-    }
-
-    .step { position: relative; }
-
-    .step-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .step-num::before {
-      content: '';
-      width: 44px; height: 44px;
-      border: 1px solid rgba(201,168,76,0.4);
-      border-radius: 50%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--dark);
-    }
-
-    .step-num-circle {
-      width: 44px; height: 44px;
-      border: 1px solid rgba(201,168,76,0.4);
-      border-radius: 50%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--dark);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .step h4 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .step p {
-      font-size: 0.92rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: rgba(245,240,232,0.55);
-    }
-
-    /* ─── CTA ─── */
-    .cta {
-      margin: 0 clamp(20px, 4vw, 60px) var(--gap);
-      background: var(--dark2);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 4px;
-      padding: clamp(50px, 8vw, 100px) clamp(30px, 6vw, 100px);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 60px;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta::before {
-      content: 'TRANSFORM';
-      position: absolute;
-      right: -60px; top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 12rem;
-      color: rgba(201,168,76,0.04);
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    .cta-left .section-tag { margin-bottom: 20px; }
-
-    .cta-left .section-title { margin-bottom: 20px; }
-
-    .cta-left p {
-      font-size: 1.05rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: rgba(245,240,232,0.55);
-      max-width: 500px;
-    }
-
-    .cta-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      z-index: 1;
-      flex-shrink: 0;
-    }
-
-    .cta-btn {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 16px 32px;
-      border-radius: 2px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      white-space: nowrap;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .cta-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
-      transform: translateX(-100%);
-      transition: transform 0.5s ease;
-    }
-
-    .cta-btn:hover::before { transform: translateX(100%); }
-
-    .cta-btn.whatsapp {
-      background: #25D366;
-      color: #fff;
-    }
-
-    .cta-btn.whatsapp:hover {
-      background: #1ab557;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(37,211,102,0.4);
-    }
-
-    .cta-btn.email {
-      background: transparent;
-      border: 1px solid rgba(245,240,232,0.2);
-      color: var(--white);
-    }
-
-    .cta-btn.email:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-
-    .cta-btn.instagram {
-      background: transparent;
-      border: 1px solid rgba(201,168,76,0.3);
-      color: var(--gold);
-    }
-
-    .cta-btn.instagram:hover {
-      background: var(--gold);
-      color: var(--black);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(201,168,76,0.35);
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--dark2);
-      border-top: 1px solid rgba(245,240,232,0.06);
-      padding: 30px clamp(20px, 8vw, 120px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.2rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-    }
-
-    footer p {
-      font-size: 0.8rem;
-      color: var(--gray);
-      font-weight: 300;
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 1024px) {
-      .cards-grid { grid-template-columns: 1fr; gap: 2px; }
-      .process-steps { grid-template-columns: repeat(2, 1fr); }
-      .process-steps::before { display: none; }
-      .cta { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-
-      .hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-
-      .hero-right { display: none; }
-
-      .hero-left {
-        padding: 100px 24px 60px;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .hero-stats { gap: 24px; flex-wrap: wrap; }
-
-      .about {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .about-right { grid-template-columns: 1fr 1fr; }
-      .about-img.tall img { min-height: 280px; }
-
-      .cert-strip { flex-direction: column; text-align: center; }
-
-      .programs-header { flex-direction: column; align-items: flex-start; }
-
-      .process-steps { grid-template-columns: 1fr; gap: 32px; }
-
-      .cta-buttons { flex-direction: row; flex-wrap: wrap; }
-
-      footer { flex-direction: column; text-align: center; }
-
-      .quote-break { padding: var(--gap) 24px; }
-      .about, .programs, .process { padding: 60px 24px; }
-    }
-
-    /* ─── SCROLL REVEAL — UPGRADED ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.from-left {
-      transform: translateX(-40px);
-    }
-
-    .reveal.from-right {
-      transform: translateX(40px);
-    }
-
-    .reveal.scale-in {
-      transform: scale(0.94) translateY(20px);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0) translateX(0) scale(1);
-    }
-
-    .reveal-delay-1 { transition-delay: 0.12s; }
-    .reveal-delay-2 { transition-delay: 0.24s; }
-    .reveal-delay-3 { transition-delay: 0.36s; }
-    .reveal-delay-4 { transition-delay: 0.48s; }
-
-    /* Plan card stagger */
-    .plan-card { transition: background 0.3s, transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s; }
-
-    /* Step circle pulse on hover */
-    .step-num-circle {
-      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-
-    .step:hover .step-num-circle {
-      border-color: var(--gold);
-      box-shadow: 0 0 20px rgba(201,168,76,0.3);
-      transform: scale(1.1);
-    }
-
-    /* Gold line progress bar */
-    .scroll-progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
-      background: linear-gradient(to right, var(--gold-dark), var(--gold), var(--gold-light));
-      z-index: 9998;
-      width: 0%;
-      transition: width 0.05s linear;
-    }
-
-    /* Parallax layer */
-    .parallax-text {
-      will-change: transform;
-    }
+    .transformations {
+  padding: var(--gap) clamp(20px, 8vw, 120px);
+  background: var(--dark);
+}
+.transform-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.transform-card {
+  background: var(--dark2);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.transform-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+.transform-images {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 4px;
+}
+.transform-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.transform-img-wrap img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.3s;
+  display: block;
+}
+.transform-card:hover .transform-img-wrap img { filter: grayscale(0%); }
+.transform-label {
+  position: absolute;
+  bottom: 10px; left: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: rgba(6,6,6,0.75);
+  color: var(--gray);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+.transform-label.after { color: var(--gold); }
+.transform-divider {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  padding: 0 2px;
+  text-align: center;
+}
+.transform-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-top: 1px solid rgba(201,168,76,0.12);
+}
+.transform-duration {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+}
+.transform-program {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+@media (max-width: 768px) {
+  .transform-grid { grid-template-columns: 1fr; }
+}
+    :root{
+      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#8B6914;
+      --black:#060606;--dark:#0E0E0E;--dark2:#161616;--dark3:#1E1E1E;
+      --white:#F5F0E8;--gray:#888;--gap:clamp(60px,10vw,120px);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Barlow',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+    body.rtl{font-family:'Cairo',sans-serif;direction:rtl}
+
+    /* NOISE */
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+    /* SCROLL BAR */
+    #sp{position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,var(--gold-dark),var(--gold),var(--gold-light));z-index:9998;width:0;transition:width .05s linear}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(to bottom,rgba(6,6,6,.95),transparent);transition:all .35s ease}
+    nav.sc{background:rgba(6,6,6,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,.12)}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.15em;color:var(--gold);text-decoration:none;flex-shrink:0}
+    .nav-links{display:flex;gap:24px;list-style:none;flex:1;justify-content:center}
+    .nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--white);text-decoration:none;opacity:.7;transition:opacity .2s,color .2s}
+    .nav-links a:hover{opacity:1;color:var(--gold)}
+    .nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .ls{display:flex;gap:3px;border:1px solid rgba(201,168,76,.25);border-radius:3px;overflow:hidden}
+    .lb{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.1em;padding:5px 9px;background:transparent;color:rgba(245,240,232,.5);border:none;cursor:pointer;transition:background .2s,color .2s;text-transform:uppercase}
+    .lb.active{background:var(--gold);color:var(--black)}
+    .lb:hover:not(.active){color:var(--gold)}
+    .nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:8px 18px;border-radius:2px;text-decoration:none;transition:background .2s,transform .2s;white-space:nowrap}
+    .nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+    .hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+    .hbg span{width:22px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
+    .hbg.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .hbg.open span:nth-child(2){opacity:0}
+    .hbg.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .mm{display:none;position:fixed;inset:0;background:rgba(6,6,6,.98);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+    .mm.open{display:flex}
+    .mm a,.mm button{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.08em;color:var(--white);text-decoration:none;background:none;border:none;cursor:pointer;transition:color .2s}
+    .mm a:hover,.mm button.ml-btn:hover{color:var(--gold)}
+    .ml{display:flex;gap:12px;margin-top:8px}
+    .ml-btn{font-family:'Barlow Condensed',sans-serif !important;font-size:.9rem !important;letter-spacing:.14em !important;color:rgba(245,240,232,.5) !important;background:none;border:1px solid rgba(201,168,76,.3) !important;padding:7px 18px;border-radius:2px;cursor:pointer;transition:all .2s}
+    .ml-btn.active{background:var(--gold) !important;color:var(--black) !important;border-color:var(--gold) !important}
+
+    /* HERO */
+    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(201,168,76,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(201,168,76,.04) 0%,transparent 60%)}
+    .hero-left{padding:clamp(100px,12vw,160px) clamp(20px,5vw,80px) clamp(60px,8vw,100px) clamp(20px,8vw,120px);position:relative;z-index:2}
+    body.rtl .hero-left{padding:clamp(100px,12vw,160px) clamp(20px,8vw,120px) clamp(60px,8vw,100px) clamp(20px,5vw,80px)}
+    .hero-badge{display:inline-flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;padding:6px 14px 6px 6px;border:1px solid rgba(201,168,76,.3);border-radius:2px;animation:fadeIn .8s .3s both}
+    body.rtl .hero-badge{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:blink 2s infinite;flex-shrink:0}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7.5vw,7.5rem);line-height:.92;letter-spacing:.02em;margin-bottom:30px}
+    body.rtl .hero-title{font-family:'Cairo',sans-serif;font-size:clamp(2.6rem,5.5vw,6rem);font-weight:700;line-height:1.05}
+    .hero-title .line{display:block;overflow:hidden}
+    .hero-title .line-inner{display:block;animation:slideUp .9s cubic-bezier(.16,1,.3,1) both}
+    .hero-title .line:nth-child(1) .line-inner{animation-delay:.1s}
+    .hero-title .line:nth-child(2) .line-inner{animation-delay:.2s}
+    .hero-title .line:nth-child(3) .line-inner{animation-delay:.3s}
+    .hero-title .line:nth-child(4) .line-inner{animation-delay:.4s;color:var(--gold)}
+    @keyframes slideUp{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+    .hero-title .word{display:inline-block;transition:color .3s,text-shadow .3s}
+    .hero-title .word.glow{color:var(--gold);text-shadow:0 0 40px rgba(201,168,76,.8),0 0 80px rgba(201,168,76,.4)}
+    .hero-title .glitch-word{position:relative;display:inline-block;color:var(--gold)}
+    .hero-title .glitch-word::before,.hero-title .glitch-word::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%}
+    .hero-title .glitch-word::before{animation:g1 3s infinite;clip-path:polygon(0 0,100% 0,100% 35%,0 35%);color:#ff6b35;opacity:0}
+    .hero-title .glitch-word::after{animation:g2 3s infinite;clip-path:polygon(0 65%,100% 65%,100% 100%,0 100%);color:var(--gold-light);opacity:0}
+    @keyframes g1{0%,90%,100%{opacity:0;transform:translateX(0)}92%{opacity:1;transform:translateX(-4px) skewX(-2deg)}94%{opacity:0;transform:translateX(3px)}96%{opacity:1;transform:translateX(-2px)}98%{opacity:0}}
+    @keyframes g2{0%,90%,100%{opacity:0;transform:translateX(0)}93%{opacity:1;transform:translateX(4px) skewX(2deg)}95%{opacity:0;transform:translateX(-3px)}97%{opacity:1;transform:translateX(2px)}99%{opacity:0}}
+    .hero-title .uw{position:relative}
+    .hero-title .uw::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:3px;background:var(--gold);animation:ulg .6s cubic-bezier(.16,1,.3,1) 1.6s both}
+    @keyframes ulg{from{width:0}to{width:100%}}
+    .hero-sub{font-size:1.05rem;font-weight:300;line-height:1.75;color:rgba(245,240,232,.65);max-width:420px;margin-bottom:40px;animation:fadeIn 1s .7s both}
+    body.rtl .hero-sub{font-family:'Cairo',sans-serif;font-size:1rem}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeIn 1s .9s both}
+    .hero-stats{margin-top:50px;display:flex;gap:36px;animation:fadeIn 1s 1.1s both;flex-wrap:wrap}
+    .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.3rem;color:var(--gold);line-height:1}
+    .stat-label{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-top:3px}
+    body.rtl .stat-label{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .hero-right{position:relative;height:100vh;overflow:hidden}
+    .hero-image-wrap{width:100%;height:100%;position:relative}
+    .hero-image-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--black) 0%,transparent 30%),linear-gradient(to top,var(--black) 0%,transparent 40%);z-index:1}
+    body.rtl .hero-image-wrap::before{background:linear-gradient(to left,var(--black) 0%,transparent 30%),linear-gradient(to top,var(--black) 0%,transparent 40%)}
+    .hero-image-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(20%) contrast(1.1)}
+    .hero-accent-text{position:absolute;right:-20px;top:50%;transform:translateY(-50%) rotate(90deg);font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(201,168,76,.05);letter-spacing:.1em;white-space:nowrap;pointer-events:none}
+    .scroll-ind{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;z-index:3;animation:fadeIn 1s 1.8s both;cursor:pointer}
+    .scroll-ind span{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(245,240,232,.35)}
+    .scroll-mouse{width:21px;height:34px;border:1px solid rgba(201,168,76,.4);border-radius:11px;display:flex;justify-content:center;padding-top:6px}
+    .scroll-mouse::before{content:'';width:3px;height:6px;background:var(--gold);border-radius:2px;animation:sd 1.8s ease infinite}
+    @keyframes sd{0%{transform:translateY(0);opacity:1}80%{transform:translateY(11px);opacity:0}100%{transform:translateY(0);opacity:0}}
+
+    /* BUTTONS */
+    .btn-primary{font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;background:var(--gold);color:var(--black);border:none;padding:14px 32px;border-radius:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:9px;position:relative;overflow:hidden;transition:background .25s,transform .25s,box-shadow .25s}
+    body.rtl .btn-primary{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25) 50%,transparent 70%);transform:translateX(-100%);transition:transform .5s}
+    .btn-primary:hover::before{transform:translateX(100%)}
+    .btn-primary:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 16px 40px rgba(201,168,76,.45),0 0 0 1px rgba(201,168,76,.3)}
+    .btn-outline{font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;background:transparent;color:var(--white);border:1px solid rgba(245,240,232,.3);padding:14px 32px;border-radius:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;position:relative;overflow:hidden;transition:border-color .25s,color .25s,transform .25s,box-shadow .25s}
+    body.rtl .btn-outline{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .btn-outline::before{content:'';position:absolute;inset:0;background:rgba(201,168,76,.08);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+    .btn-outline:hover::before{transform:scaleX(1)}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+
+    /* SECTION HEADER */
+    .st{font-family:'Barlow Condensed',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.21em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:11px;margin-bottom:13px}
+    .st::before{content:'';width:28px;height:1px;background:var(--gold);flex-shrink:0}
+    body.rtl .st{font-family:'Cairo',sans-serif;letter-spacing:0}
+    body.rtl .st::before{order:2}
+    .sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.6rem);line-height:.95;letter-spacing:.02em}
+    body.rtl .sec-title{font-family:'Cairo',sans-serif;font-weight:700;font-size:clamp(1.9rem,4vw,3.8rem);line-height:1.1}
+
+    /* ABOUT */
+    .about{padding:var(--gap) clamp(20px,8vw,120px);display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+    .about-left .sec-title{margin-bottom:22px}
+    .about-left p{font-size:.98rem;font-weight:300;line-height:1.8;color:rgba(245,240,232,.65);margin-bottom:14px}
+    body.rtl .about-left p{font-family:'Cairo',sans-serif}
+    .about-left p strong{color:var(--white);font-weight:500}
+    .ac{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
+    .cp{font-family:'Barlow Condensed',sans-serif;font-size:.73rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border:1px solid rgba(201,168,76,.4);color:var(--gold);padding:5px 11px;border-radius:2px;transition:background .2s}
+    .cp:hover{background:rgba(201,168,76,.1)}
+    body.rtl .cp{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .about-right{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .ai{border-radius:4px;overflow:hidden;position:relative}
+    .ai img{width:100%;height:290px;object-fit:cover;object-position:center 20%;display:block;transition:transform .5s;filter:grayscale(15%) contrast(1.05)}
+    .ai:hover img{transform:scale(1.05)}
+    .ai.tall{grid-row:span 2}
+    .ai.tall img{height:100%;min-height:440px}
+    .ai-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,6,.55) 0%,transparent 55%)}
+
+    /* CERT */
+    .cert-strip{background:var(--dark2);border-top:1px solid rgba(201,168,76,.14);border-bottom:1px solid rgba(201,168,76,.14);padding:34px clamp(20px,8vw,120px);display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+    .ci{width:105px;border-radius:4px;flex-shrink:0;border:1px solid rgba(201,168,76,.3)}
+    .ct h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.05em;color:var(--gold);margin-bottom:5px}
+    body.rtl .ct h3{font-family:'Cairo',sans-serif;font-weight:700}
+    .ct p{font-size:.9rem;font-weight:300;color:rgba(245,240,232,.52)}
+    body.rtl .ct p{font-family:'Cairo',sans-serif}
+
+    /* QUOTE */
+    .qb{padding:var(--gap) clamp(20px,10vw,160px);position:relative;overflow:hidden}
+    .qb::before{content:'???';position:absolute;top:-20px;left:60px;font-size:12rem;color:rgba(201,168,76,.05);font-family:serif;pointer-events:none}
+    body.rtl .qb::before{left:auto;right:60px}
+    .qt{font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.4rem,3.2vw,2.5rem);font-weight:300;font-style:italic;line-height:1.45;color:var(--white);position:relative;z-index:1}
+    body.rtl .qt{font-family:'Cairo',sans-serif;font-style:normal;font-weight:400}
+    .qt strong{color:var(--gold);font-style:normal;font-weight:700}
+
+    /* PROGRAMS */
+    .programs{padding:var(--gap) clamp(20px,8vw,120px);background:var(--dark)}
+    .ph{margin-bottom:46px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .ps{font-size:.92rem;font-weight:300;color:rgba(245,240,232,.5);max-width:340px;line-height:1.7}
+    body.rtl .ps{font-family:'Cairo',sans-serif}
+    .cg{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+
+    /* CARD */
+    .pc{background:var(--dark2);padding:clamp(20px,3vw,36px);position:relative;transition:background .3s,box-shadow .3s;overflow:hidden;display:flex;flex-direction:column}
+    .pc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .3s}
+    .pc:hover::before,.pc.ft::before{background:var(--gold)}
+    .pc:hover{background:var(--dark3)}
+    .pc.ft{background:var(--dark3)}
+    .ptag{font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+    body.rtl .ptag{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .pb-pop{background:var(--gold);color:var(--black);padding:2px 7px;border-radius:2px;font-size:.6rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:.08em}
+    .pname{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,2.3vw,2.1rem);letter-spacing:.03em;line-height:1;margin-bottom:14px}
+    body.rtl .pname{font-family:'Cairo',sans-serif;font-weight:700;font-size:clamp(1.2rem,1.9vw,1.7rem);line-height:1.2}
+    .pdesc{font-size:.85rem;font-weight:300;line-height:1.6;color:rgba(245,240,232,.5);margin-bottom:18px}
+    body.rtl .pdesc{font-family:'Cairo',sans-serif}
+    .pf{list-style:none;margin-bottom:20px;flex:1}
+    .pf li{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;letter-spacing:.04em;color:rgba(245,240,232,.7);padding:7px 0;border-bottom:1px solid rgba(245,240,232,.06);display:flex;align-items:flex-start;gap:9px}
+    body.rtl .pf li{font-family:'Cairo',sans-serif;letter-spacing:0;flex-direction:row-reverse;text-align:right}
+    .pf li::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0;margin-top:5px}
+    body.rtl .pf li::before{order:2}
+
+    /* DUAL PRICE */
+    .pp{display:flex;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+    .pb2{flex:1;min-width:80px}
+    .ppl{font-family:'Barlow Condensed',sans-serif;font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gray);margin-bottom:3px}
+    body.rtl .ppl{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .pr{display:flex;align-items:baseline;gap:4px}
+    .pa{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,2.5vw,2.4rem);line-height:1;color:var(--white)}
+    .pc-cur{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:700;color:var(--gold);letter-spacing:.07em}
+    .pd{width:1px;background:rgba(245,240,232,.1);align-self:stretch}
+
+    /* SESSION PRICES */
+    .sp2{margin-bottom:18px}
+    .sr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(245,240,232,.06)}
+    body.rtl .sr{flex-direction:row-reverse}
+    .sl{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.05em;color:rgba(245,240,232,.62)}
+    body.rtl .sl{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .sv{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--gold)}
+
+    /* PLAN BTN */
+    .plan-btn{font-family:'Barlow Condensed',sans-serif;font-size:.83rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:12px 18px;border-radius:2px;border:1px solid rgba(201,168,76,.4);background:transparent;color:var(--gold);cursor:pointer;text-decoration:none;display:block;text-align:center;position:relative;overflow:hidden;transition:all .3s cubic-bezier(.16,1,.3,1);margin-top:auto}
+    body.rtl .plan-btn{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .plan-btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(201,168,76,.2);border-radius:50%;transform:translate(-50%,-50%);transition:width .5s,height .5s}
+    .plan-btn:hover::before{width:300px;height:300px}
+    .plan-btn:hover,.pc.ft .plan-btn{background:var(--gold);border-color:var(--gold);color:var(--black);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.35)}
+    .pc.ft .plan-btn:hover{background:var(--gold-light)}
+    .can{position:absolute;bottom:-14px;right:14px;font-family:'Bebas Neue',sans-serif;font-size:6.5rem;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;user-select:none}
+
+    /* PROCESS */
+    .process{padding:var(--gap) clamp(20px,8vw,120px)}
+    .proc-hdr{margin-bottom:52px}
+    .proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;position:relative}
+    .proc-steps::before{content:'';position:absolute;top:22px;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.3),transparent)}
+    .snc{width:44px;height:44px;border:1px solid rgba(201,168,76,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--dark);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);margin-bottom:16px;transition:border-color .3s,box-shadow .3s,transform .3s;position:relative;z-index:1}
+    .step:hover .snc{border-color:var(--gold);box-shadow:0 0 20px rgba(201,168,76,.3);transform:scale(1.1)}
+    .step h4{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:9px}
+    body.rtl .step h4{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .step p{font-size:.88rem;font-weight:300;line-height:1.7;color:rgba(245,240,232,.5)}
+    body.rtl .step p{font-family:'Cairo',sans-serif}
+
+    /* CTA */
+    .cta-sec{margin:0 clamp(20px,4vw,60px) var(--gap);background:var(--dark2);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:clamp(46px,7vw,86px) clamp(28px,5vw,86px);display:grid;grid-template-columns:1fr auto;gap:50px;align-items:center;position:relative;overflow:hidden}
+    .cta-sec::before{content:'TRANSFORM';position:absolute;right:-50px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:11rem;color:rgba(201,168,76,.04);white-space:nowrap;pointer-events:none}
+    body.rtl .cta-sec::before{right:auto;left:-50px}
+    .cl .st{margin-bottom:14px}
+    .cl .sec-title{margin-bottom:14px}
+    .cl p{font-size:.97rem;font-weight:300;line-height:1.7;color:rgba(245,240,232,.5);max-width:460px}
+    body.rtl .cl p{font-family:'Cairo',sans-serif}
+    .cbs{display:flex;flex-direction:column;gap:11px;z-index:1;flex-shrink:0}
+    .cb{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:14px 26px;border-radius:2px;text-decoration:none;display:flex;align-items:center;gap:10px;white-space:nowrap;position:relative;overflow:hidden;transition:all .3s cubic-bezier(.16,1,.3,1)}
+    body.rtl .cb{font-family:'Cairo',sans-serif;letter-spacing:0}
+    .cb::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.15) 50%,transparent 70%);transform:translateX(-100%);transition:transform .5s}
+    .cb:hover::before{transform:translateX(100%)}
+    .cb.wa{background:#25D366;color:#fff}
+    .cb.wa:hover{background:#1ab557;transform:translateY(-3px);box-shadow:0 12px 30px rgba(37,211,102,.4)}
+    .cb.em{background:transparent;border:1px solid rgba(245,240,232,.2);color:var(--white)}
+    .cb.em:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+    .cb.ig{background:transparent;border:1px solid rgba(201,168,76,.3);color:var(--gold)}
+    .cb.ig:hover{background:var(--gold);color:var(--black);transform:translateY(-3px);box-shadow:0 12px 30px rgba(201,168,76,.35)}
+
+    /* FOOTER */
+    footer{background:var(--dark2);border-top:1px solid rgba(245,240,232,.06);padding:26px clamp(20px,8vw,120px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .fl{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.14em;color:var(--gold)}
+    footer p{font-size:.76rem;color:var(--gray);font-weight:300}
+    body.rtl footer p{font-family:'Cairo',sans-serif}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(38px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .rd1{transition-delay:.12s}.rd2{transition-delay:.24s}.rd3{transition-delay:.36s}.rd4{transition-delay:.48s}
+
+    /* RESPONSIVE */
+    @media(max-width:1200px){.cg{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:1024px){
+      .about{grid-template-columns:1fr;gap:36px}
+      .proc-steps{grid-template-columns:repeat(2,1fr)}
+      .proc-steps::before{display:none}
+      .cta-sec{grid-template-columns:1fr}
+      .cbs{flex-direction:row;flex-wrap:wrap}
+    }
+    @media(max-width:768px){
+      nav{padding:13px 18px}
+      .nav-links,.nav-cta{display:none}
+      .hbg{display:flex}
+      .hero{grid-template-columns:1fr}
+      .hero-right{display:none}
+      .hero-left{padding:86px 22px 56px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+      .about-right{grid-template-columns:1fr 1fr}
+      .ai.tall img{min-height:240px}
+      .cert-strip{flex-direction:column;text-align:center}
+      .ph{flex-direction:column;align-items:flex-start}
+      .cg{grid-template-columns:1fr}
+      .proc-steps{grid-template-columns:1fr;gap:26px}
+      .qb{padding:56px 22px}
+      .about,.programs,.process{padding:56px 22px}
+      footer{flex-direction:column;text-align:center}
+    }
+    @keyframes rippleOut{to{transform:scale(1);opacity:0}}
   </style>
 </head>
 <body>
 
-  <!-- ─── SCROLL PROGRESS ─── -->
-  <div class="scroll-progress" id="scrollProgress"></div>
+<div id="sp"></div>
 
-  <!-- ─── NAV ─── -->
-  <nav>
-    <a href="#" class="nav-logo">ANAS BOUGHLI</a>
-    <ul class="nav-links">
-      <li><a href="#about">À Propos</a></li>
-      <li><a href="#programs">Programmes</a></li>
-      <li><a href="#process">Comment Ça Marche</a></li>
-      <li><a href="#contact" class="nav-cta">Commencer</a></li>
-    </ul>
-  </nav>
-
-  <!-- ─── HERO ─── -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-lines"></div>
-
-    <div class="hero-left">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        Champion Marocain de Bodybuilding
-      </div>
-
-      <h1 class="hero-title">
-        <span class="line"><span class="line-inner"><span class="word" data-word="FORGE">FORGE</span></span></span>
-        <span class="line"><span class="line-inner"><span class="word underline-word" data-word="TON">TON</span></span></span>
-        <span class="line"><span class="line-inner"><span class="word" data-word="CORPS.">CORPS.</span></span></span>
-        <span class="line"><span class="line-inner"><span class="glitch-word" data-text="MAINTENANT.">MAINTENANT.</span></span></span>
-      </h1>
-
-      <p class="hero-sub">
-        Coach personnel certifié et champion marocain. Des programmes sur mesure qui produisent de <em>vrais résultats</em> — transformation physique, préparation compétition, et bien plus.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#programs" class="btn-primary">Voir les Programmes</a>
-        <a href="https://wa.me/+971589752239" class="btn-outline">WhatsApp →</a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-num">200+</div>
-          <div class="stat-label">Transformations</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">8+</div>
-          <div class="stat-label">Ans d'Expérience</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">NASM</div>
-          <div class="stat-label">Certifié</div>
-        </div>
-      </div>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">ANAS BOUGHLI</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i="nav.about">À Propos</a></li>
+    <li><a href="#transformations">Transformations</a></li>
+    <li><a href="#programs" data-i="nav.programs">Programmes</a></li>
+    <li><a href="#process" data-i="nav.process">Comment Ça Marche</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="ls">
+      <button class="lb active" data-lang="fr" onclick="setLang('fr')">FR</button>
+      <button class="lb" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lb" data-lang="ar" onclick="setLang('ar')">AR</button>
     </div>
+    <a href="#contact" class="nav-cta" data-i="nav.cta">Commencer</a>
+  </div>
+  <button class="hbg" id="hbg" onclick="toggleMM()"><span></span><span></span><span></span></button>
+</nav>
 
-    <div class="hero-right">
-      <div class="hero-image-wrap">
-        <img src="./img3.jpeg" alt="Anas Boughli — Moroccan Champion" />
-      </div>
-      <div class="hero-accent-text">CHAMPION</div>
+<!-- MOBILE MENU -->
+<div class="mm" id="mm">
+  <a href="#about" onclick="toggleMM()" data-i="nav.about">À Propos</a>
+  <a href="#programs" onclick="toggleMM()" data-i="nav.programs">Programmes</a>
+  <a href="#process" onclick="toggleMM()" data-i="nav.process">Comment Ça Marche</a>
+  <a href="#contact" onclick="toggleMM()" data-i="nav.cta">Commencer</a>
+  <div class="ml">
+    <button class="ml-btn active" data-lang="fr" onclick="setLang('fr');toggleMM()">Français</button>
+    <button class="ml-btn" data-lang="en" onclick="setLang('en');toggleMM()">English</button>
+    <button class="ml-btn" data-lang="ar" onclick="setLang('ar');toggleMM()">العربية</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-badge"><span class="dot"></span><span data-i="hero.badge">Champion Marocain de Bodybuilding</span></div>
+    <h1 class="hero-title" id="ht">
+      <span class="line"><span class="line-inner"><span class="word" data-key="hero.l1">FORGE</span></span></span>
+      <span class="line"><span class="line-inner"><span class="word uw" data-key="hero.l2">TON</span></span></span>
+      <span class="line"><span class="line-inner"><span class="word" data-key="hero.l3">CORPS.</span></span></span>
+      <span class="line"><span class="line-inner"><span class="glitch-word" data-text="MAINTENANT." data-key="hero.l4">MAINTENANT.</span></span></span>
+    </h1>
+    <p class="hero-sub" data-i="hero.sub">Coach personnel certifié et champion marocain. Des programmes sur mesure qui produisent de <em>vrais résultats</em> — transformation physique, préparation compétition, et bien plus.</p>
+    <div class="hero-actions">
+      <a href="#programs" class="btn-primary" data-i="hero.cta1">Voir les Programmes</a>
+      <a href="https://wa.me/+212680930964" class="btn-outline">WhatsApp →</a>
     </div>
-
-    <!-- Scroll indicator -->
-    <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
-      <div class="scroll-mouse"></div>
-      <span>Défiler</span>
-    </div>
-  </section>
-
-  <!-- ─── ABOUT ─── -->
-  <section class="about" id="about">
-    <div class="about-left">
-      <div class="section-tag reveal">À Propos du Coach</div>
-      <h2 class="section-title reveal reveal-delay-1">ENTRAÎNE-TOI<br>AVEC LES<br>MEILLEURS.</h2>
-
-      <p class="reveal reveal-delay-2">
-        <strong>Coach personnel certifié NASM et champion marocain</strong>, Anas Boughli a dédié sa vie à la transformation physique. Avec des années d'expérience en compétition et des méthodes d'entraînement éprouvées, il a transformé des centaines de vies.
-      </p>
-      <p class="reveal reveal-delay-3">
-        Que tu veuilles construire du muscle, perdre de la graisse ou <strong>concourir au plus haut niveau</strong>, Anas t'accompagne à chaque étape avec expertise, soutien et un engagement total envers ta réussite.
-      </p>
-
-      <div class="about-creds reveal reveal-delay-3">
-        <span class="cred-pill">NASM Certifié</span>
-        <span class="cred-pill">Champion Maroc</span>
-        <span class="cred-pill">Prep Compétition</span>
-        <span class="cred-pill">Nutrition Expert</span>
-      </div>
-    </div>
-
-    <div class="about-right reveal reveal-delay-2">
-      <div class="about-img tall">
-        <img src="./images/img4.jpeg" alt="Anas en compétition" />
-        <div class="about-img-overlay"></div>
-      </div>
-      <div class="about-img">
-        <img src="./images/img3.jpeg" alt="Sur scène" />
-        <div class="about-img-overlay"></div>
-      </div>
-      <div class="about-img">
-        <img src="./images/img2.jpeg" alt="Championnat Maroc" />
-        <div class="about-img-overlay"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── CERT STRIP ─── -->
-  <div class="cert-strip reveal">
-    <img src="./images/img5.jpeg" alt="NASM Certification" class="cert-img" />
-    <div class="cert-text">
-      <h3>NASM — Certified Personal Trainer</h3>
-      <p>Certification reconnue mondialement. Anas applique des méthodes scientifiquement validées pour maximiser tes résultats en toute sécurité.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">200</div><div class="stat-label" data-i="hero.s1">Transformations</div></div>
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label" data-i="hero.s2">Ans d'Expérience</div></div>
+      <div class="stat"><div class="stat-num" style="font-size:1.5rem">NASM</div><div class="stat-label" data-i="hero.s3">Certifié</div></div>
     </div>
   </div>
+  <div class="hero-right">
+    <div class="hero-image-wrap"><img src="./img3.jpeg" alt="Anas Boughli"/></div>
+    <div class="hero-accent-text">CHAMPION</div>
+  </div>
+  <div class="scroll-ind" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-mouse"></div>
+    <span data-i="hero.scroll">Défiler</span>
+  </div>
+</section>
 
-  <!-- ─── QUOTE ─── -->
-  <section class="quote-break">
-    <p class="quote-text reveal">
-      La douleur que tu ressens aujourd'hui est la <strong>force que tu ressentiras demain.</strong> Ton corps peut tout supporter — c'est <strong>ton mental</strong> qu'il faut convaincre.
-    </p>
-  </section>
-
-  <!-- ─── PROGRAMS ─── -->
-  <section class="programs" id="programs">
-    <div class="programs-header">
-      <div>
-        <div class="section-tag reveal">Coaching En Ligne</div>
-        <h2 class="section-title reveal reveal-delay-1">NOS<br>PROGRAMMES.</h2>
-      </div>
-      <p class="programs-subtitle reveal reveal-delay-2">Chaque programme est entièrement personnalisé selon tes objectifs, ton niveau et ton mode de vie. Pas de programme générique.</p>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-left">
+    <div class="st reveal" data-i="ab.tag">À Propos du Coach</div>
+    <h2 class="sec-title reveal rd1" data-i="ab.title">ENTRAÎNE-TOI<br>AVEC LES<br>MEILLEURS.</h2>
+    <p class="reveal rd2"><strong data-i="ab.p1s">Coach certifié NASM et champion marocain</strong>, <span data-i="ab.p1">Anas Boughli a dédié sa vie à la transformation physique. Avec des années d'expérience en compétition et des méthodes éprouvées, il a transformé des centaines de vies.</span></p>
+    <p class="reveal rd3" data-i="ab.p2">Que tu veuilles construire du muscle, perdre de la graisse ou <strong>concourir au plus haut niveau</strong>, Anas t'accompagne à chaque étape avec expertise et un engagement total envers ta réussite.</p>
+    <div class="ac reveal rd3">
+      <span class="cp">NASM</span>
+      <span class="cp" data-i="cr.ch">Champion Maroc</span>
+      <span class="cp" data-i="cr.pr">Prep Compétition</span>
+      <span class="cp" data-i="cr.nu">Nutrition Expert</span>
+      <span class="cp" data-i="cr.ho">Coaching Domicile</span>
     </div>
+  </div>
+  <div class="about-right reveal rd2">
+    <div class="ai tall"><img src="./img1.jpeg" alt=""/><div class="ai-ov"></div></div>
+    <div class="ai"><img src="./img2.jpeg" alt=""/><div class="ai-ov"></div></div>
+    <div class="ai"><img src="./img4.jpeg" alt=""/><div class="ai-ov"></div></div>
+  </div>
+</section>
+<!-- ─── TRANSFORMATIONS ─── -->
+<section class="transformations" id="transformations">
+  <div class="programs-header">
+    <div>
+       <div class="ct">
+        <div class="section-tag reveal">Résultats Réels</div>
+       </div>
+      <h2 class="section-title reveal reveal-delay-1">LEURS<br>TRANSFORMATIONS.</h2>
+    </div>
+    <p class="programs-subtitle reveal reveal-delay-2">Des vrais clients, de vrais résultats. Chaque transformation est le fruit d'un travail acharné et d'un coaching personnalisé.</p>
+  </div>
 
-    <div class="cards-grid">
-      <!-- Plan 1 -->
-      <div class="plan-card reveal">
-        <div class="plan-tag">Débutant — Intermédiaire</div>
-        <div class="plan-name">TRANSFORM<br>BODY</div>
-        <p class="plan-desc">Programme complet de transformation physique avec plans d'entraînement personnalisés et suivi nutritionnel hebdomadaire.</p>
-        <ul class="plan-features">
-          <li>Plan d'entraînement personnalisé</li>
-          <li>Guide nutritionnel complet</li>
-          <li>Check-in hebdomadaire</li>
-          <li>Suivi des progrès</li>
-          <li>Accès groupe privé</li>
-        </ul>
-        <div class="plan-price">
-          <span class="price-amount">2&thinsp;500</span>
-          <span class="price-currency">DH</span>
-          <span class="price-period">/ mois</span>
+  <div class="transform-grid">
+    <div class="transform-card reveal">
+      <div class="transform-images">
+        <div class="transform-img-wrap">
+          <img src="./before1.jpeg" alt="Avant transformation 1" loading="lazy" />
+          <span class="transform-label">AVANT</span>
         </div>
-        <a href="https://wa.me/+971589752239" class="plan-btn">Commencer →</a>
-        <span class="card-accent-num">01</span>
-      </div>
-
-      <!-- Plan 2 — Featured -->
-      <div class="plan-card featured reveal reveal-delay-1">
-        <div class="plan-tag">Recommandé <span class="popular-badge">POPULAIRE</span></div>
-        <div class="plan-name">ELITE<br>COACHING</div>
-        <p class="plan-desc">Coaching avancé avec suivi des macros détaillé, protocoles de supplémentation et consultations vidéo bimensuelles.</p>
-        <ul class="plan-features">
-          <li>Tout du plan précédent</li>
-          <li>Suivi macros détaillé</li>
-          <li>Protocoles suppléments</li>
-          <li>2 consultations vidéo/mois</li>
-          <li>Ajustements en temps réel</li>
-          <li>Prep compétition inclus</li>
-        </ul>
-        <div class="plan-price">
-          <span class="price-amount">2&thinsp;700</span>
-          <span class="price-currency">DH</span>
-          <span class="price-period">/ mois</span>
+        <div class="transform-divider">→</div>
+        <div class="transform-img-wrap">
+          <img src="./after1.jpeg" alt="Après transformation 1" loading="lazy" />
+          <span class="transform-label after">APRÈS</span>
         </div>
-        <a href="https://wa.me/+971589752239" class="plan-btn">Commencer →</a>
-        <span class="card-accent-num">02</span>
       </div>
+      <div class="transform-info">
+        <span class="transform-duration">3 Mois</span>
+        <span class="transform-program">Elite Coaching</span>
+      </div>
+    </div>
 
-      <!-- Plan 3 -->
-      <div class="plan-card reveal reveal-delay-2">
-        <div class="plan-tag">All-Inclusive Premium</div>
-        <div class="plan-name">ELITE<br>TRANSFORMATION</div>
-        <p class="plan-desc">Programme premium tout-en-un avec coaching quotidien, plans de repas personnalisés, préparation compétition et accès 24h/24.</p>
-        <ul class="plan-features">
-          <li>Tout du plan précédent</li>
-          <li>Coaching quotidien</li>
-          <li>Plans repas sur mesure</li>
-          <li>Accès 24/7 direct</li>
-          <li>Suivi physique complet</li>
-          <li>Expertise compétition elite</li>
-        </ul>
-        <div class="plan-price">
-          <span class="price-amount">3&thinsp;500</span>
-          <span class="price-currency">DH</span>
-          <span class="price-period">/ mois</span>
+    <div class="transform-card reveal reveal-delay-1">
+      <div class="transform-images">
+        <div class="transform-img-wrap">
+          <img src="./before2.jpeg" alt="Avant transformation 2" loading="lazy" />
+          <span class="transform-label">AVANT</span>
         </div>
-        <a href="https://wa.me/+971589752239" class="plan-btn">Commencer →</a>
-        <span class="card-accent-num">03</span>
+        <div class="transform-divider">→</div>
+        <div class="transform-img-wrap">
+          <img src="./after2.jpeg" alt="Après transformation 2" loading="lazy" />
+          <span class="transform-label after">APRÈS</span>
+        </div>
+      </div>
+      <div class="transform-info">
+        <span class="transform-duration">2 Mois</span>
+        <span class="transform-program">Transform Body</span>
       </div>
     </div>
-  </section>
 
-  <!-- ─── PROCESS ─── -->
-  <section class="process" id="process">
-    <div class="process-header">
-      <div class="section-tag reveal">Comment Ça Marche</div>
-      <h2 class="section-title reveal reveal-delay-1">4 ÉTAPES VERS<br>TA TRANSFORMATION.</h2>
-    </div>
-
-    <div class="process-steps">
-      <div class="step reveal reveal-delay-1">
-        <div class="step-num-circle">01</div>
-        <h4>Consultation Initiale</h4>
-        <p>On analyse ensemble tes objectifs, ton niveau actuel, ta disponibilité et tes contraintes pour définir le bon programme.</p>
+    <div class="transform-card reveal reveal-delay-2">
+      <div class="transform-images">
+        <div class="transform-img-wrap">
+          <img src="./before3.jpeg" alt="Avant transformation 3" loading="lazy" />
+          <span class="transform-label">AVANT</span>
+        </div>
+        <div class="transform-divider">→</div>
+        <div class="transform-img-wrap">
+          <img src="./after3.jpeg" alt="Après transformation 3" loading="lazy" />
+          <span class="transform-label after">APRÈS</span>
+        </div>
       </div>
-      <div class="step reveal reveal-delay-2">
-        <div class="step-num-circle">02</div>
-        <h4>Plan Personnalisé</h4>
-        <p>Création de ton programme d'entraînement et de nutrition 100% sur mesure, conçu pour tes objectifs spécifiques.</p>
-      </div>
-      <div class="step reveal reveal-delay-3">
-        <div class="step-num-circle">03</div>
-        <h4>Suivi & Ajustements</h4>
-        <p>Suivi régulier de tes progrès avec ajustements continus du programme pour maintenir une progression optimale.</p>
-      </div>
-      <div class="step reveal reveal-delay-4">
-        <div class="step-num-circle">04</div>
-        <h4>Résultats Durables</h4>
-        <p>Transformation physique complète accompagnée d'un mindset fort et d'habitudes saines pour toute une vie.</p>
+      <div class="transform-info">
+        <span class="transform-duration">4 Mois</span>
+        <span class="transform-program">Elite Transformation</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+<!-- CERT -->
+<div class="cert-strip reveal">
+  <img src="./img5.jpeg" alt="NASM" class="ci"/>
+  <div class="ct">
+    <h3 data-i="ce.ti">NASM — Certified Personal Trainer</h3>
+    <p data-i="ce.de">Certification reconnue mondialement. Anas applique des méthodes scientifiquement validées pour maximiser tes résultats en toute sécurité.</p>
+  </div>
+</div>
 
-  <!-- ─── CTA ─── -->
-  <section class="cta" id="contact">
-    <div class="cta-left">
-      <div class="section-tag">Prêt à Commencer ?</div>
-      <h2 class="section-title reveal">COMMENCE TA<br>TRANSFORMATION<br>AUJOURD'HUI.</h2>
-      <p class="reveal reveal-delay-1">La première étape est la plus importante. Contacte Anas maintenant pour discuter de tes objectifs et recevoir un plan personnalisé gratuitement.</p>
+<!-- QUOTE -->
+<section class="qb">
+  <p class="qt reveal" data-i="qt">La douleur que tu ressens aujourd'hui est la <strong>force que tu ressentiras demain.</strong> Ton corps peut tout supporter — c'est <strong>ton mental</strong> qu'il faut convaincre.</p>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="ph">
+    <div>
+      <div class="st reveal" data-i="pr.tag">Coaching En Ligne</div>
+      <h2 class="sec-title reveal rd1" data-i="pr.ti">NOS<br>PROGRAMMES.</h2>
+    </div>
+    <p class="ps reveal rd2" data-i="pr.su">Chaque programme est entièrement personnalisé selon tes objectifs, ton niveau et ton mode de vie.</p>
+  </div>
+
+  <div class="cg">
+    <!-- P1 -->
+    <div class="pc reveal">
+      <div class="ptag" data-i="p1.tg">Débutant — Intermédiaire</div>
+      <div class="pname" data-i="p1.nm">TRANSFORM<br>BODY</div>
+      <p class="pdesc" data-i="p1.ds">Programme complet de transformation avec plans d'entraînement personnalisés et suivi nutritionnel hebdomadaire.</p>
+      <ul class="pf">
+        <li data-i="p1.f1">Plan d'entraînement personnalisé</li>
+        <li data-i="p1.f2">Guide nutritionnel complet</li>
+        <li data-i="p1.f3">Check-in hebdomadaire</li>
+        <li data-i="p1.f4">Suivi des progrès</li>
+        <li data-i="p1.f5">Accès groupe privé</li>
+      </ul>
+      <div class="pp">
+        <div class="pb2"><div class="ppl" data-i="pr.1m">1 Mois</div><div class="pr"><span class="pa">700</span><span class="pc-cur">MAD</span></div></div>
+        <div class="pd"></div>
+        <div class="pb2"><div class="ppl" data-i="pr.3m">3 Mois</div><div class="pr"><span class="pa">1800</span><span class="pc-cur">MAD</span></div></div>
+      </div>
+      <a href="https://wa.me/+971589752239" class="plan-btn" data-i="pl.ct">Commencer →</a>
+      <span class="can">01</span>
     </div>
 
-    <div class="cta-buttons reveal reveal-delay-2">
-      <a href="https://wa.me/+971589752239" class="cta-btn whatsapp">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.786 23.214l4.291-1.483C6.955 23.154 9.406 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.379 0-4.592-.737-6.423-1.992l-.461-.274-2.547.879.879-2.547-.274-.461C1.737 16.592 1 14.379 1 12 1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-        WhatsApp
-      </a>
-      <a href="/cdn-cgi/l/email-protection#2f6e414e5c5c4e4d405a4e4346161e6f48424e4643014c4042" class="cta-btn email">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Email
-      </a>
-      <a href="https://www.instagram.com/anasshealthcoach/" class="cta-btn instagram">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        Instagram
-      </a>
+    <!-- P2 -->
+    <div class="pc reveal rd1">
+      <div class="ptag" data-i="p2.tg">Avancé</div>
+      <div class="pname" data-i="p2.nm">ELITE<br>COACHING</div>
+      <p class="pdesc" data-i="p2.ds">Coaching avancé avec suivi des macros, protocoles de supplémentation et consultations vidéo bimensuelles.</p>
+      <ul class="pf">
+        <li data-i="p2.f1">Tout du plan précédent</li>
+        <li data-i="p2.f2">Suivi macros détaillé</li>
+        <li data-i="p2.f3">Protocoles suppléments</li>
+        <li data-i="p2.f4">2 consultations vidéo/mois</li>
+        <li data-i="p2.f5">Ajustements en temps réel</li>
+        <li data-i="p2.f6">Prep compétition inclus</li>
+      </ul>
+      <div class="pp">
+        <div class="pb2"><div class="ppl" data-i="pr.1m">1 Mois</div><div class="pr"><span class="pa">1300</span><span class="pc-cur">MAD</span></div></div>
+        <div class="pd"></div>
+        <div class="pb2"><div class="ppl" data-i="pr.3m">3 Mois</div><div class="pr"><span class="pa">3300</span><span class="pc-cur">MAD</span></div></div>
+      </div>
+      <a href="https://wa.me/+971589752239" class="plan-btn" data-i="pl.ct">Commencer →</a>
+      <span class="can">02</span>
     </div>
-  </section>
 
-  <!-- ─── FOOTER ─── -->
-  <footer>
-    <div class="footer-logo">ANAS BOUGHLI</div>
-    <p>Coach Personnel Certifié NASM · Champion Marocain · Dubai & Online</p>
-    <p>© 2025 Anas Boughli. Tous droits réservés.</p>
-  </footer>
+    <!-- P3 -->
+    <div class="pc ft reveal rd2">
+      <div class="ptag">Premium <span class="pb-pop" data-i="bd.pop">POPULAIRE</span></div>
+      <div class="pname" data-i="p3.nm">ELITE<br>TRANSFORMATION</div>
+      <p class="pdesc" data-i="p3.ds">Programme premium tout-en-un avec coaching quotidien, plans de repas sur mesure, prep compétition et accès 24h/24.</p>
+      <ul class="pf">
+        <li data-i="p3.f1">Tout du plan précédent</li>
+        <li data-i="p3.f2">Coaching quotidien</li>
+        <li data-i="p3.f3">Plans repas sur mesure</li>
+        <li data-i="p3.f4">Accès 24/7 direct</li>
+        <li data-i="p3.f5">Suivi physique complet</li>
+        <li data-i="p3.f6">Expertise compétition elite</li>
+      </ul>
+      <div class="pp">
+        <div class="pb2"><div class="ppl" data-i="pr.1m">1 Mois</div><div class="pr"><span class="pa">2200</span><span class="pc-cur">MAD</span></div></div>
+        <div class="pd"></div>
+        <div class="pb2"><div class="ppl" data-i="pr.3m">3 Mois</div><div class="pr"><span class="pa">5700</span><span class="pc-cur">MAD</span></div></div>
+      </div>
+      <a href="https://wa.me/+971589752239" class="plan-btn" data-i="pl.ct">Commencer →</a>
+      <span class="can">03</span>
+    </div>
 
-  <script>
-    // ─── SCROLL PROGRESS BAR ───
-    const scrollProgress = document.getElementById('scrollProgress');
-    window.addEventListener('scroll', () => {
-      const docH = document.documentElement.scrollHeight - window.innerHeight;
-      scrollProgress.style.width = ((window.scrollY / docH) * 100) + '%';
-    }, { passive: true });
+    <!-- P4 IN-HOME -->
+    <div class="pc reveal rd3">
+      <div class="ptag" data-i="p4.tg">Domicile • Homme &amp; Femme</div>
+      <div class="pname" data-i="p4.nm">COACHING<br>À DOMICILE</div>
+      <p class="pdesc" data-i="p4.ds">Entraînement personnel chez vous — supervision directe, technique parfaite, résultats plus rapides.</p>
+      <div class="sp2">
+        <div class="sr">
+          <span class="sl" data-i="p4.s1">1 Séance</span>
+          <span class="sv">250 <span style="font-size:.75rem">MAD</span></span>
+        </div>
+        <div class="sr">
+          <span class="sl" data-i="p4.s2">5 Séances</span>
+          <span class="sv">1100 <span style="font-size:.75rem">MAD</span></span>
+        </div>
+        <div class="sr">
+          <span class="sl" data-i="p4.s3">10 Séances</span>
+          <span class="sv">2000 <span style="font-size:.75rem">MAD</span></span>
+        </div>
+      </div>
+      <ul class="pf">
+        <li data-i="p4.f1">Entraînement personnalisé à domicile</li>
+        <li data-i="p4.f2">Supervision directe et correction technique</li>
+        <li data-i="p4.f3">Conseils nutrition intégrés à la séance</li>
+        <li data-i="p4.f4">Confort + efficacité + résultats rapides</li>
+      </ul>
+      <a href="https://wa.me/+971589752239" class="plan-btn" data-i="pl.ct">Commencer →</a>
+      <span class="can">04</span>
+    </div>
+  </div>
+</section>
 
-    // ─── NAV ON SCROLL ───
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY > 60;
-      nav.style.background = scrolled ? 'rgba(6,6,6,0.97)' : 'linear-gradient(to bottom, rgba(6,6,6,0.95), transparent)';
-      nav.style.backdropFilter = scrolled ? 'blur(16px)' : 'none';
-      nav.style.borderBottom = scrolled ? '1px solid rgba(201,168,76,0.12)' : 'none';
-      nav.style.transition = 'all 0.35s ease';
-    }, { passive: true });
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="proc-hdr">
+    <div class="st reveal" data-i="pc.tg">Comment Ça Marche</div>
+    <h2 class="sec-title reveal rd1" data-i="pc.ti">4 ÉTAPES VERS<br>TA TRANSFORMATION.</h2>
+  </div>
+  <div class="proc-steps">
+    <div class="step reveal rd1"><div class="snc">01</div><h4 data-i="s1.ti">Consultation Initiale</h4><p data-i="s1.de">On analyse ensemble tes objectifs, ton niveau, ta disponibilité et tes contraintes pour définir le bon programme.</p></div>
+    <div class="step reveal rd2"><div class="snc">02</div><h4 data-i="s2.ti">Plan Personnalisé</h4><p data-i="s2.de">Création de ton programme d'entraînement et de nutrition 100% sur mesure, conçu pour tes objectifs spécifiques.</p></div>
+    <div class="step reveal rd3"><div class="snc">03</div><h4 data-i="s3.ti">Suivi & Ajustements</h4><p data-i="s3.de">Suivi régulier de tes progrès avec ajustements continus du programme pour maintenir une progression optimale.</p></div>
+    <div class="step reveal rd4"><div class="snc">04</div><h4 data-i="s4.ti">Résultats Durables</h4><p data-i="s4.de">Transformation physique complète accompagnée d'un mindset fort et d'habitudes saines pour toute une vie.</p></div>
+  </div>
+</section>
 
-    // ─── SCROLL REVEAL ───
-    const revealEls = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          revealObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
-    revealEls.forEach(el => revealObserver.observe(el));
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <div class="cl">
+    <div class="st" data-i="ct.tg">Prêt à Commencer ?</div>
+    <h2 class="sec-title reveal" data-i="ct.ti">COMMENCE TA<br>TRANSFORMATION<br>AUJOURD'HUI.</h2>
+    <p class="reveal rd1" data-i="ct.de">La première étape est la plus importante. Contacte Anas maintenant pour discuter de tes objectifs et recevoir un plan personnalisé gratuitement.</p>
+  </div>
+  <div class="cbs reveal rd2">
+    <a href="https://wa.me/+212680930964" class="cb wa">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.786 23.214l4.291-1.483C6.955 23.154 9.406 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.379 0-4.592-.737-6.423-1.992l-.461-.274-2.547.879.879-2.547-.274-.461C1.737 16.592 1 14.379 1 12 1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11z"/></svg>
+      WhatsApp
+    </a>
+    <a href="mailto:Anassabouali91@gmail.com" class="cb em">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email
+    </a>
+    <a href="https://www.instagram.com/anasshealthcoach/" class="cb ig">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Instagram
+    </a>
+  </div>
+</section>
 
-    // ─── HERO TITLE WORD GLOW CYCLE ───
-    const words = document.querySelectorAll('.hero-title .word');
-    let wordIdx = 0;
-    function cycleWordGlow() {
-      words.forEach(w => w.classList.remove('glow'));
-      if (words[wordIdx]) words[wordIdx].classList.add('glow');
-      wordIdx = (wordIdx + 1) % words.length;
+<!-- FOOTER -->
+<footer>
+  <div class="fl">ANAS BOUGHLI</div>
+  <p data-i="ft.tl">Coach Personnel Certifié NASM · Champion Marocain · Maroc &amp; Online</p>
+  <p data-i="ft.cp">© 2025 Anas Boughli. Tous droits réservés.</p>
+</footer>
+
+<script>
+const T = {
+fr:{
+  "nav.about":"À Propos","nav.programs":"Programmes","nav.process":"Comment Ça Marche","nav.cta":"Commencer",
+  "hero.badge":"Champion Marocain de Bodybuilding",
+  "hero.l1":"FORGE","hero.l2":"TON","hero.l3":"CORPS.","hero.l4":"MAINTENANT.",
+  "hero.sub":"Coach personnel certifié et champion marocain. Des programmes sur mesure qui produisent de <em>vrais résultats</em> — transformation physique, préparation compétition, et bien plus.",
+  "hero.cta1":"Voir les Programmes","hero.s1":"Transformations","hero.s2":"Ans d'Expérience","hero.s3":"Certifié","hero.scroll":"Défiler",
+  "ab.tag":"À Propos du Coach","ab.title":"ENTRAÎNE-TOI<br>AVEC LES<br>MEILLEURS.",
+  "ab.p1s":"Coach certifié NASM et champion marocain","ab.p1":"Anas Boughli a dédié sa vie à la transformation physique. Avec des années d'expérience en compétition et des méthodes éprouvées, il a transformé des centaines de vies.",
+  "ab.p2":"Que tu veuilles construire du muscle, perdre de la graisse ou <strong>concourir au plus haut niveau</strong>, Anas t'accompagne à chaque étape avec expertise et un engagement total envers ta réussite.",
+  "cr.ch":"Champion Maroc","cr.pr":"Prep Compétition","cr.nu":"Nutrition Expert","cr.ho":"Coaching Domicile",
+  "ce.ti":"NASM — Certified Personal Trainer","ce.de":"Certification reconnue mondialement. Anas applique des méthodes scientifiquement validées pour maximiser tes résultats en toute sécurité.",
+  "qt":"La douleur que tu ressens aujourd'hui est la <strong>force que tu ressentiras demain.</strong> Ton corps peut tout supporter — c'est <strong>ton mental</strong> qu'il faut convaincre.",
+  "pr.tag":"Coaching En Ligne","pr.ti":"NOS<br>PROGRAMMES.","pr.su":"Chaque programme est entièrement personnalisé selon tes objectifs, ton niveau et ton mode de vie.",
+  "pr.1m":"1 Mois","pr.3m":"3 Mois",
+  "p1.tg":"Débutant — Intermédiaire","p1.nm":"TRANSFORM<br>BODY","p1.ds":"Programme complet de transformation avec plans d'entraînement personnalisés et suivi nutritionnel hebdomadaire.","p1.f1":"Plan d'entraînement personnalisé","p1.f2":"Guide nutritionnel complet","p1.f3":"Check-in hebdomadaire","p1.f4":"Suivi des progrès","p1.f5":"Accès groupe privé",
+  "p2.tg":"Avancé","p2.nm":"ELITE<br>COACHING","p2.ds":"Coaching avancé avec suivi des macros, protocoles de supplémentation et consultations vidéo bimensuelles.","p2.f1":"Tout du plan précédent","p2.f2":"Suivi macros détaillé","p2.f3":"Protocoles suppléments","p2.f4":"2 consultations vidéo/mois","p2.f5":"Ajustements en temps réel","p2.f6":"Prep compétition inclus",
+  "bd.pop":"POPULAIRE","p3.nm":"ELITE<br>TRANSFORMATION","p3.ds":"Programme premium tout-en-un avec coaching quotidien, plans de repas sur mesure, prep compétition et accès 24h/24.","p3.f1":"Tout du plan précédent","p3.f2":"Coaching quotidien","p3.f3":"Plans repas sur mesure","p3.f4":"Accès 24/7 direct","p3.f5":"Suivi physique complet","p3.f6":"Expertise compétition elite",
+  "p4.tg":"Domicile • Homme & Femme","p4.nm":"COACHING<br>À DOMICILE","p4.ds":"Entraînement personnel chez vous — supervision directe, technique parfaite, résultats plus rapides.","p4.s1":"1 Séance","p4.s2":"5 Séances","p4.s3":"10 Séances","p4.f1":"Entraînement personnalisé à domicile","p4.f2":"Supervision directe et correction technique","p4.f3":"Conseils nutrition intégrés à la séance","p4.f4":"Confort + efficacité + résultats rapides",
+  "pl.ct":"Commencer →",
+  "pc.tg":"Comment Ça Marche","pc.ti":"4 ÉTAPES VERS<br>TA TRANSFORMATION.",
+  "s1.ti":"Consultation Initiale","s1.de":"On analyse ensemble tes objectifs, ton niveau, ta disponibilité et tes contraintes pour définir le bon programme.",
+  "s2.ti":"Plan Personnalisé","s2.de":"Création de ton programme d'entraînement et de nutrition 100% sur mesure, conçu pour tes objectifs spécifiques.",
+  "s3.ti":"Suivi & Ajustements","s3.de":"Suivi régulier de tes progrès avec ajustements continus du programme pour maintenir une progression optimale.",
+  "s4.ti":"Résultats Durables","s4.de":"Transformation physique complète accompagnée d'un mindset fort et d'habitudes saines pour toute une vie.",
+  "ct.tg":"Prêt à Commencer ?","ct.ti":"COMMENCE TA<br>TRANSFORMATION<br>AUJOURD'HUI.","ct.de":"La première étape est la plus importante. Contacte Anas maintenant pour discuter de tes objectifs et recevoir un plan personnalisé gratuitement.",
+  "ft.tl":"Coach Personnel Certifié NASM · Champion Marocain · Maroc & Online","ft.cp":"© 2025 Anas Boughli. Tous droits réservés."
+},
+en:{
+  "nav.about":"About","nav.programs":"Programs","nav.process":"How It Works","nav.cta":"Get Started",
+  "hero.badge":"Moroccan Bodybuilding Champion",
+  "hero.l1":"FORGE","hero.l2":"YOUR","hero.l3":"BODY.","hero.l4":"NOW.",
+  "hero.sub":"Certified personal trainer and Moroccan champion. Tailored programs that deliver <em>real results</em> — body transformation, competition prep, and more.",
+  "hero.cta1":"View Programs","hero.s1":"Transformations","hero.s2":"Years Experience","hero.s3":"Certified","hero.scroll":"Scroll",
+  "ab.tag":"About the Coach","ab.title":"TRAIN WITH<br>THE BEST.",
+  "ab.p1s":"NASM Certified Personal Trainer & Moroccan Champion","ab.p1":"Anas Boughli has dedicated his life to physical transformation. With years of competitive experience and proven training methods, he has transformed hundreds of lives.",
+  "ab.p2":"Whether you want to build muscle, lose fat, or <strong>compete at the highest level</strong>, Anas guides you every step of the way with expertise and total commitment to your success.",
+  "cr.ch":"Moroccan Champion","cr.pr":"Competition Prep","cr.nu":"Nutrition Expert","cr.ho":"In-Home Coaching",
+  "ce.ti":"NASM — Certified Personal Trainer","ce.de":"Globally recognized certification. Anas applies scientifically validated methods to maximize your results safely and effectively.",
+  "qt":"The pain you feel today is the <strong>strength you'll feel tomorrow.</strong> Your body can handle almost anything — it's <strong>your mind</strong> you have to convince.",
+  "pr.tag":"Online Coaching","pr.ti":"OUR<br>PROGRAMS.","pr.su":"Every program is fully personalized to your goals, level and lifestyle. No generic plans.",
+  "pr.1m":"1 Month","pr.3m":"3 Months",
+  "p1.tg":"Beginner — Intermediate","p1.nm":"TRANSFORM<br>BODY","p1.ds":"Complete body transformation with personalized workout plans and weekly nutrition guidance.","p1.f1":"Personalized training plan","p1.f2":"Complete nutrition guide","p1.f3":"Weekly check-in","p1.f4":"Progress tracking","p1.f5":"Private group access",
+  "p2.tg":"Advanced","p2.nm":"ELITE<br>COACHING","p2.ds":"Advanced coaching with detailed macro tracking, supplement protocols and bi-weekly video consultations.","p2.f1":"Everything in previous plan","p2.f2":"Detailed macro tracking","p2.f3":"Supplement protocols","p2.f4":"2 video calls/month","p2.f5":"Real-time adjustments","p2.f6":"Competition prep included",
+  "bd.pop":"POPULAR","p3.nm":"ELITE<br>TRANSFORMATION","p3.ds":"Premium all-inclusive with daily coaching, custom meal plans, competition prep, and 24/7 access.","p3.f1":"Everything in previous plan","p3.f2":"Daily coaching","p3.f3":"Custom meal plans","p3.f4":"24/7 direct access","p3.f5":"Full physical tracking","p3.f6":"Elite competition expertise",
+  "p4.tg":"In-Home • Men & Women","p4.nm":"IN-HOME<br>TRAINING","p4.ds":"Personal training at your home — direct supervision, perfect technique, faster results.","p4.s1":"Single Session","p4.s2":"5-Session Package","p4.s3":"10-Session Package","p4.f1":"Personalized training at home","p4.f2":"Direct supervision & technique correction","p4.f3":"Nutrition & health advice included","p4.f4":"Comfort + efficiency + faster results",
+  "pl.ct":"Get Started →",
+  "pc.tg":"How It Works","pc.ti":"4 STEPS TO YOUR<br>TRANSFORMATION.",
+  "s1.ti":"Initial Consultation","s1.de":"We analyze your goals, current level, availability and constraints together to define the right program.",
+  "s2.ti":"Custom Plan","s2.de":"Your 100% personalized training and nutrition program, designed for your specific goals.",
+  "s3.ti":"Tracking & Adjustments","s3.de":"Regular progress tracking with continuous program adjustments to maintain optimal progression.",
+  "s4.ti":"Lasting Results","s4.de":"Complete physical transformation paired with a stronger mindset and healthy habits for life.",
+  "ct.tg":"Ready to Start?","ct.ti":"BEGIN YOUR<br>TRANSFORMATION<br>TODAY.","ct.de":"The first step is the most important. Contact Anas now to discuss your goals and receive a free personalized plan.",
+  "ft.tl":"NASM Certified Personal Trainer · Moroccan Champion · Morocco & Online","ft.cp":"© 2025 Anas Boughli. All rights reserved."
+},
+ar:{
+  "nav.about":"من أنا","nav.programs":"البرامج","nav.process":"كيف يعمل","nav.cta":"ابدأ الآن",
+  "hero.badge":"بطل المغرب في كمال الأجسام",
+  "hero.l1":"اصنع","hero.l2":"جسدك","hero.l3":"الآن.","hero.l4":"بلا تأخير.",
+  "hero.sub":"مدرب شخصي معتمد وبطل مغربي. برامج مخصصة تحقق <em>نتائج حقيقية</em> — تحول جسدي، تحضير للبطولات، وأكثر.",
+  "hero.cta1":"اكتشف البرامج","hero.s1":"تحول ناجح","hero.s2":"سنوات خبرة","hero.s3":"معتمد","hero.scroll":"تمرير",
+  "ab.tag":"عن المدرب","ab.title":"تدرّب مع<br>الأفضل.",
+  "ab.p1s":"مدرب شخصي معتمد NASM وبطل مغربي","ab.p1":"أنس بوغلي كرّس حياته للتحول الجسدي. بسنوات من الخبرة التنافسية ومناهج تدريب مجربة، غيّر حياة المئات.",
+  "ab.p2":"سواء أردت بناء العضلات أو حرق الدهون أو <strong>المنافسة على أعلى المستويات</strong>، يرافقك أنس في كل خطوة بالخبرة والالتزام الكامل.",
+  "cr.ch":"بطل المغرب","cr.pr":"تحضير بطولات","cr.nu":"خبير تغذية","cr.ho":"تدريب منزلي",
+  "ce.ti":"NASM — مدرب شخصي معتمد","ce.de":"شهادة معترف بها عالمياً. يطبق أنس مناهج مدعومة علمياً لتحقيق أقصى نتائجك بأمان تام.",
+  "qt":"الألم الذي تشعر به اليوم هو <strong>القوة التي ستشعر بها غداً.</strong> جسدك يتحمل كل شيء — <strong>عقلك</strong> هو ما تحتاج إلى إقناعه.",
+  "pr.tag":"تدريب عبر الإنترنت","pr.ti":"برامجنا<br>التدريبية.","pr.su":"كل برنامج مخصص بالكامل وفق أهدافك ومستواك وأسلوب حياتك. لا خطط جاهزة.",
+  "pr.1m":"شهر واحد","pr.3m":"3 أشهر",
+  "p1.tg":"مبتدئ — متوسط","p1.nm":"تحول<br>الجسم","p1.ds":"برنامج تحول جسدي شامل مع خطط تدريب مخصصة ومتابعة غذائية أسبوعية.","p1.f1":"خطة تدريب مخصصة","p1.f2":"دليل تغذية شامل","p1.f3":"متابعة أسبوعية","p1.f4":"تتبع التقدم","p1.f5":"وصول لمجموعة خاصة",
+  "p2.tg":"متقدم","p2.nm":"تدريب<br>النخبة","p2.ds":"تدريب متقدم مع تتبع دقيق للماكرو وبروتوكولات المكملات واستشارات فيديو نصف شهرية.","p2.f1":"كل ما في الخطة السابقة","p2.f2":"تتبع دقيق للماكرو","p2.f3":"بروتوكولات مكملات","p2.f4":"مكالمتا فيديو/شهر","p2.f5":"تعديلات فورية","p2.f6":"تحضير بطولات مشمول",
+  "bd.pop":"الأكثر طلباً","p3.nm":"تحول<br>النخبة","p3.ds":"برنامج بريميوم شامل مع تدريب يومي وخطط وجبات مخصصة وتحضير بطولات ووصول 24/7.","p3.f1":"كل ما في الخطة السابقة","p3.f2":"تدريب يومي","p3.f3":"خطط وجبات مخصصة","p3.f4":"وصول مباشر 24/7","p3.f5":"متابعة جسدية شاملة","p3.f6":"خبرة بطولات نخبة",
+  "p4.tg":"منزلي • رجال ونساء","p4.nm":"تدريب<br>منزلي","p4.ds":"تدريب شخصي في منزلك — إشراف مباشر، تقنية صحيحة، نتائج أسرع.","p4.s1":"جلسة واحدة","p4.s2":"باقة 5 جلسات","p4.s3":"باقة 10 جلسات","p4.f1":"تدريب مخصص في المنزل","p4.f2":"إشراف مباشر وتصحيح التقنية","p4.f3":"نصائح تغذية وصحة خلال الجلسة","p4.f4":"راحة + كفاءة + نتائج أسرع",
+  "pl.ct":"ابدأ الآن →",
+  "pc.tg":"كيف يعمل","pc.ti":"4 خطوات نحو<br>تحولك.",
+  "s1.ti":"استشارة أولية","s1.de":"نحلل معاً أهدافك ومستواك الحالي وتوافرك وقيودك لتحديد البرنامج المناسب.",
+  "s2.ti":"خطة مخصصة","s2.de":"إنشاء برنامج تدريب وتغذية مخصص 100% لأهدافك المحددة.",
+  "s3.ti":"متابعة وتعديلات","s3.de":"متابعة منتظمة لتقدمك مع تعديلات مستمرة للبرنامج للحفاظ على التقدم الأمثل.",
+  "s4.ti":"نتائج دائمة","s4.de":"تحول جسدي كامل مصحوب بعقلية قوية وعادات صحية مدى الحياة.",
+  "ct.tg":"مستعد للبدء؟","ct.ti":"ابدأ تحولك<br>اليوم.","ct.de":"الخطوة الأولى هي الأهم. تواصل مع أنس الآن لمناقشة أهدافك والحصول على خطة مخصصة مجانية.",
+  "ft.tl":"مدرب شخصي معتمد NASM · بطل مغربي · المغرب وعبر الإنترنت","ft.cp":"© 2025 أنس بوغلي. جميع الحقوق محفوظة."
+}};
+
+function setLang(lang){
+  const t=T[lang], ar=lang==='ar';
+  document.body.classList.toggle('rtl',ar);
+  document.documentElement.setAttribute('lang',lang);
+  document.documentElement.setAttribute('dir',ar?'rtl':'ltr');
+
+  // text nodes
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    const k=el.getAttribute('data-i');
+    if(t[k]!==undefined) el.innerHTML=t[k];
+  });
+
+  // hero title words
+  document.querySelectorAll('#ht [data-key]').forEach(el=>{
+    const k=el.getAttribute('data-key');
+    if(t[k]){
+      el.textContent=t[k];
+      if(el.classList.contains('glitch-word')) el.setAttribute('data-text',t[k]);
     }
-    setTimeout(() => { cycleWordGlow(); setInterval(cycleWordGlow, 900); }, 1600);
+  });
 
-    // ─── PARALLAX HERO ACCENT TEXT ───
-    const accentText = document.querySelector('.hero-accent-text');
-    window.addEventListener('scroll', () => {
-      if (accentText) accentText.style.transform = `translateY(calc(-50% + ${window.scrollY * 0.3}px)) rotate(90deg)`;
-    }, { passive: true });
+  // lang buttons
+  document.querySelectorAll('.lb,.ml-btn').forEach(b=>b.classList.toggle('active',b.getAttribute('data-lang')===lang));
+}
+setLang('fr');
 
-    // ─── STATS COUNTER ───
-    document.querySelectorAll('.stat-num').forEach(el => {
-      const io = new IntersectionObserver(([entry]) => {
-        if (!entry.isIntersecting) return;
-        const raw = el.textContent;
-        const num = parseInt(raw);
-        if (isNaN(num)) return;
-        const hasPl = raw.includes('+');
-        let start = null;
-        (function step(ts) {
-          if (!start) start = ts;
-          const p = Math.min((ts - start) / 1200, 1);
-          const ease = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(ease * num) + (hasPl ? '+' : '');
-          if (p < 1) requestAnimationFrame(step);
-        })(performance.now());
-        io.disconnect();
-      }, { threshold: 0.5 });
-      io.observe(el);
-    });
+// scroll progress
+const sp=document.getElementById('sp');
+window.addEventListener('scroll',()=>{
+  sp.style.width=((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100)+'%';
+},{passive:true});
 
-    // ─── MAGNETIC + RIPPLE BUTTONS ───
-    document.querySelectorAll('.btn-primary, .btn-outline, .plan-btn, .cta-btn').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width / 2) * 0.12;
-        const y = (e.clientY - r.top - r.height / 2) * 0.12;
-        btn.style.transform = `translate(${x}px, ${y}px) translateY(-3px)`;
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transition = 'all 0.45s cubic-bezier(0.16,1,0.3,1)';
-        btn.style.transform = '';
-        setTimeout(() => btn.style.transition = '', 450);
-      });
-      btn.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        const r = this.getBoundingClientRect();
-        const sz = Math.max(r.width, r.height) * 2;
-        Object.assign(ripple.style, {
-          position: 'absolute', borderRadius: '50%',
-          width: sz + 'px', height: sz + 'px',
-          left: (e.clientX - r.left - sz / 2) + 'px',
-          top: (e.clientY - r.top - sz / 2) + 'px',
-          background: 'rgba(255,255,255,0.22)',
-          transform: 'scale(0)', pointerEvents: 'none',
-          animation: 'rippleOut 0.6s ease-out forwards'
-        });
-        this.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-      });
-    });
+// nav scroll
+const navEl=document.getElementById('nav');
+window.addEventListener('scroll',()=>navEl.classList.toggle('sc',window.scrollY>60),{passive:true});
 
-    // ─── CARD 3D TILT ───
-    document.querySelectorAll('.plan-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(800px) rotateY(${x*5}deg) rotateX(${-y*5}deg) translateY(-8px)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1), background 0.3s, box-shadow 0.3s';
-        card.style.transform = '';
-        setTimeout(() => card.style.transition = '', 500);
-      });
-    });
+// mobile menu
+function toggleMM(){
+  document.getElementById('hbg').classList.toggle('open');
+  document.getElementById('mm').classList.toggle('open');
+}
 
-    // ─── QUOTE HIGHLIGHT ───
-    const quoteSection = document.querySelector('.quote-break');
-    if (quoteSection) {
-      new IntersectionObserver(([e]) => {
-        if (!e.isIntersecting) return;
-        quoteSection.querySelectorAll('strong').forEach((s, i) => {
-          setTimeout(() => {
-            s.style.transition = 'text-shadow 0.6s ease, color 0.6s ease';
-            s.style.textShadow = '0 0 30px rgba(201,168,76,0.6)';
-          }, 300 + i * 600);
-        });
-      }, { threshold: 0.4 }).observe(quoteSection);
-    }
+// reveal
+document.querySelectorAll('.reveal').forEach(el=>
+  new IntersectionObserver(([e])=>{if(e.isIntersecting)e.target.classList.add('visible')},{threshold:.08,rootMargin:'0px 0px -50px 0px'}).observe(el)
+);
 
-    // Ripple keyframe
-    document.head.insertAdjacentHTML('beforeend', '<style>@keyframes rippleOut { to { transform: scale(1); opacity: 0; } }</style>');
-  </script>
+// word glow
+let wi=0;
+const gw=()=>{
+  const ws=document.querySelectorAll('#ht .word');
+  ws.forEach(w=>w.classList.remove('glow'));
+  if(ws[wi])ws[wi].classList.add('glow');
+  wi=(wi+1)%Math.max(ws.length,1);
+};
+setTimeout(()=>{gw();setInterval(gw,900);},1700);
+
+// parallax
+const acc=document.querySelector('.hero-accent-text');
+window.addEventListener('scroll',()=>{if(acc)acc.style.transform=`translateY(calc(-50% + ${window.scrollY*.3}px)) rotate(90deg)`;},{passive:true});
+
+// stats counter
+document.querySelectorAll('.stat-num').forEach(el=>{
+  const txt=el.textContent,num=parseInt(txt);
+  if(isNaN(num))return;
+  const pl=txt.includes('+');
+  new IntersectionObserver(([e])=>{
+    if(!e.isIntersecting)return;
+    let s=null;
+    (function f(ts){if(!s)s=ts;const p=Math.min((ts-s)/1200,1);el.textContent=Math.round((1-Math.pow(1-p,3))*num)+(pl?'+':'');if(p<1)requestAnimationFrame(f);})(performance.now());
+  },{threshold:.5}).observe(el);
+});
+
+// magnetic + ripple
+document.querySelectorAll('.btn-primary,.btn-outline,.plan-btn,.cb').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.1}px,${(e.clientY-r.top-r.height/2)*.1}px) translateY(-3px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{
+    btn.style.transition='all .45s cubic-bezier(.16,1,.3,1)';
+    btn.style.transform='';
+    setTimeout(()=>btn.style.transition='',450);
+  });
+  btn.addEventListener('click',function(e){
+    const rp=document.createElement('span'),r=this.getBoundingClientRect(),sz=Math.max(r.width,r.height)*2;
+    Object.assign(rp.style,{position:'absolute',borderRadius:'50%',width:sz+'px',height:sz+'px',left:(e.clientX-r.left-sz/2)+'px',top:(e.clientY-r.top-sz/2)+'px',background:'rgba(255,255,255,.22)',transform:'scale(0)',pointerEvents:'none',animation:'rippleOut .6s ease-out forwards'});
+    this.appendChild(rp);setTimeout(()=>rp.remove(),600);
+  });
+});
+
+// card tilt
+document.querySelectorAll('.pc').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    c.style.transform=`perspective(900px) rotateY(${((e.clientX-r.left)/r.width-.5)*5}deg) rotateX(${-((e.clientY-r.top)/r.height-.5)*5}deg) translateY(-6px)`;
+  });
+  c.addEventListener('mouseleave',()=>{
+    c.style.transition='transform .5s cubic-bezier(.16,1,.3,1),background .3s';
+    c.style.transform='';
+    setTimeout(()=>c.style.transition='',500);
+  });
+});
+
+// quote glow
+const qs=document.querySelector('.qb');
+if(qs)new IntersectionObserver(([e])=>{
+  if(!e.isIntersecting)return;
+  qs.querySelectorAll('strong').forEach((s,i)=>setTimeout(()=>{s.style.transition='text-shadow .6s';s.style.textShadow='0 0 30px rgba(201,168,76,.6)';},300+i*600));
+},{threshold:.3}).observe(qs);
+
+document.head.insertAdjacentHTML('beforeend','<style>@keyframes rippleOut{to{transform:scale(1);opacity:0}}</style>');
+</script>
 </body>
 </html>
